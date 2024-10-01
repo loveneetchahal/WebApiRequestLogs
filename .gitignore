@@ -555,3 +555,4 @@ mono_crash.*
 *.msi
 *.msm
 *.msp
+/obj
