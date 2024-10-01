@@ -19,5 +19,41 @@
       }
     ],
     "EndpointName": "GetWeatherForecast"
+  },
+  {
+    "ContainingType": "WebApiRequestLogs.Controllers.WeatherForecastController",
+    "Method": "GetTimeZoneByName",
+    "RelativePath": "WeatherForecast/GetTimeZoneByName/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApiRequestLogs.Controllers.WeatherForecastController",
+    "Method": "GetTimeZoneList",
+    "RelativePath": "WeatherForecast/GetTimeZoneList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApiRequestLogs.Controllers.WeatherForecastController",
+    "Method": "ThrowException",
+    "RelativePath": "WeatherForecast/throw-exception",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

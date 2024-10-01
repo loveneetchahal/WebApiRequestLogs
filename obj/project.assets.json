@@ -4591,11 +4591,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LoveneetChahal\\Projects\\LoveneetChahal\\WebApiRequestLogs\\WebApiRequestLogs.csproj",
+      "projectUniqueName": "C:\\Users\\LoveneetChahal\\Projects\\A-POCs\\WebApiRequestLogs\\WebApiRequestLogs.csproj",
       "projectName": "WebApiRequestLogs",
-      "projectPath": "C:\\Users\\LoveneetChahal\\Projects\\LoveneetChahal\\WebApiRequestLogs\\WebApiRequestLogs.csproj",
+      "projectPath": "C:\\Users\\LoveneetChahal\\Projects\\A-POCs\\WebApiRequestLogs\\WebApiRequestLogs.csproj",
       "packagesPath": "C:\\Users\\LoveneetChahal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LoveneetChahal\\Projects\\LoveneetChahal\\WebApiRequestLogs\\obj\\",
+      "outputPath": "C:\\Users\\LoveneetChahal\\Projects\\A-POCs\\WebApiRequestLogs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\LoveneetChahal\\AppData\\Roaming\\NuGet\\NuGet.Config",

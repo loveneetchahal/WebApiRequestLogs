@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.ObjectModel;
+using WebApiRequestLogs.Dtos;
 
 namespace WebApiRequestLogs.Controllers
 {
@@ -28,6 +30,60 @@ namespace WebApiRequestLogs.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet("GetTimeZoneList")]
+        public IActionResult GetTimeZoneList()
+        {
+            List<TimeZoneDto> objTimeZoneList = new List<TimeZoneDto>();
+            ReadOnlyCollection<TimeZoneInfo> tzi;
+            tzi = TimeZoneInfo.GetSystemTimeZones();
+            foreach (TimeZoneInfo timeZone in tzi)
+            {
+                TimeZoneDto objTimeZoneDto = new TimeZoneDto();
+                objTimeZoneDto.Id = timeZone.Id;
+                objTimeZoneDto.DisplayName = timeZone.DisplayName;
+                objTimeZoneList.Add(objTimeZoneDto);
+            }
+            return Ok(objTimeZoneList);
+        }
+
+        [HttpGet("GetTimeZoneByName/{name}")]
+        public IActionResult GetTimeZoneByName(string name)
+        {
+            try
+            {
+                List<TimeZoneDto> objTimeZoneList = new List<TimeZoneDto>();
+                ReadOnlyCollection<TimeZoneInfo> tzi;
+                tzi = TimeZoneInfo.GetSystemTimeZones();
+                foreach (TimeZoneInfo timeZone in tzi)
+                {
+                    TimeZoneDto objTimeZoneDto = new TimeZoneDto();
+                    objTimeZoneDto.Id = timeZone.Id;
+                    objTimeZoneDto.DisplayName = timeZone.DisplayName;
+                    objTimeZoneList.Add(objTimeZoneDto);
+                }
+
+                var result = objTimeZoneList.Where(x => x.Id.ToLower().Contains(name.ToLower())).ToList();
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("throw-exception")]
+        public IActionResult ThrowException()
+        {
+            throw new Exception("This is an unhandled exception!");
         }
     }
 }
