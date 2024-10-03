@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using WebApiRequestLogs.DbContexts;
-using WebApiRequestLogs.Filters;
+using WebApiRequestLogs.DbContexts; 
 using WebApiRequestLogs.Middlewares;
+using WebApiRequestLogs.Models;
 using WebApiRequestLogs.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,17 +16,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
                     sqlOptions.EnableRetryOnFailure();
                 }));
 /*Options*/
-builder.Services.AddOptions<RequestResponseLoggerOption>().
-    Bind(builder.Configuration.GetSection("RequestResponseLogger")).ValidateDataAnnotations();
+//builder.Services.AddOptions<RequestResponseLoggerOption>().
+//    Bind(builder.Configuration.GetSection("RequestResponseLogger")).ValidateDataAnnotations();
 /*IOC*/
-builder.Services.AddSingleton<IRequestResponseLogger, RequestResponseLogger>();
-builder.Services.AddScoped<IRequestResponseLogModelCreator, RequestResponseLogModelCreator>();
+builder.Services.AddTransient<RequestLogs>();
+builder.Services.AddScoped<IRequestResponseLogger, RequestResponseLogger>(); 
 
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add(new RequestResponseLoggerActionFilter());
-    options.Filters.Add(new RequestResponseLoggerErrorFilter());
-});
+builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -40,15 +36,7 @@ if (app.Environment.IsDevelopment())
 }
 
 /*Middleware*/
-app.UseMiddleware<RequestResponseLoggerMiddleware>();
-
-/*error manage*/
-app.UseExceptionHandler(c => c.Run(async context =>
-{
-    var exception = context.Features.Get<IExceptionHandlerPathFeature>().Error;
-    var response = new { details = "An error occurred" };
-    await context.Response.WriteAsJsonAsync(response);
-}));
+app.UseMiddleware<RequestResponseLoggerMiddleware>(); 
 
 app.UseHttpsRedirection();
 
